@@ -5,9 +5,37 @@ p {
     font-size: 20px;
 }
 
+header{
+    text-align: center;
+}
+
 container {
-    display: grid;
-    grid-template-columns: 5px 5px ;
-    grid-template-rows: 5px  5px    ;
-    gap: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid bisque;
+}
+
+container.div{
+    flex: 1;
+}
+
+aside{
+    text-align: center;
+    width: 10%;
+    height: 100%;
+    padding-right: 10px;
+    float: left;
+    font-style: italic;
+    background-color: purple;
+}
+
+section{
+    display: flex;
+    border: 5px solid bisque;
+    float: center;
+}
+
+figure{
+    align-content: center;
 }
