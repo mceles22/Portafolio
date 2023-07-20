@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html th:attr="lang=${lang}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head th:fragment="head">
     <title>Zay Shop eCommerce HTML CSS Template</title>
     <meta charset="utf-8">
@@ -36,12 +36,32 @@
         <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
              id="templatemo_main_nav">
             <div class="flex-fill">
-                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto" sec:authorize="hasRole('ROLE_ADMIN')"> <!<!-- Etiqueta SEC -->
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/admin}">Admin</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto" sec:authorize="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" th:ref="@{/login}"><i class="fas fa-sign-in-alt"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="btn btn-dark"><i class="fas fa-sign-out-alt"></i></button>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto" sec:authorize="!isAuthenticated()">
+                    <li class="nav-item">
+                        <i class="fas fa-user"></i><span sec:authentication="name">Bob</span>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="btn btn-dark"><i class="fas fa-sign-out-alt"></i></button>
+                        </form>
                     </li>
                 </ul>
             </div>
