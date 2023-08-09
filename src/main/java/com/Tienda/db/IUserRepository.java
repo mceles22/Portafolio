@@ -11,5 +11,12 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface IUserRepository extends CrudRepository<Usuario, Long> {    
     Usuario findByUsername(String username);
+    
+    Usuario findByUsernameAndPassword(String username, String Password);
+
+    Usuario findByUsernameOrCorreo(String username, String correo);
+
+    boolean existsByUsernameOrCorreo(String username, String correo);
 }
+
 

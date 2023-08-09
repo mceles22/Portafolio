@@ -8,28 +8,38 @@
         <div class="col-lg-6 m-auto">
             <button class="btn btn-primary open-modal" data-bs-target="#Modal"
                     data-bs-toggle="modal" type="button">
-                Create new category
+                Create new user
             </button>
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Imagen</th>
+                    <th scope="col">username</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">apellidos</th>
+                    <th scope="col">telefono</th>
+                    <th scope="col">correo</th>
+                    <th scope="col">rutaImagen</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="category : ${categories}">
-                    <td><span th:text="${category.id}"></span></td>
-                    <td><span th:text="${category.descripcion}"> </span></td>
-                    <td><img alt="..." class="card-img-top" th:src="${category.ruta_imagen}">
+                <tr th:each="user : ${users}">
+                    <td><span th:text="${user.idUsuario}"></span></td>
+                    <td><span th:text="${user.username}"> </span></td>
+                     <td><span th:text="${user.nombre}"> </span></td>
+                      <td><span th:text="${user.apellidos}"> </span></td>
+                       <td><span th:text="${user.telefono}"> </span></td>
+                        <td><span th:text="${user.correo}"> </span></td>
+                       
+                         
+                    <td><img alt="..." class="card-img-top" th:src="${user.ruta_imagen}">
                     </td>
                     <td>
                         <button class="btn btn-primary open-modal" data-bs-target="#Modal" data-bs-toggle="modal"
-                                th:attr="idCategory=${category.id}" type="button" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')">
+                                th:attr="idUsuario=${user.id}" type="button" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')">
                             edit
                         </button>
-                        <button class="btn btn-danger open-modal btnDeleteEntity" th:attr="idCategory=${category.id}"
+                        <button class="btn btn-danger open-modal btnDeleteEntity" th:attr="idUsuario=${user.id}"
                                 type="button" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')"> <!-- comment -->
                             delete
                         </button>
@@ -46,7 +56,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Categoría</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">User</h5>
                     <button aria-label="Close" class="close" data-bs-dismiss="modal" type="button">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -59,8 +69,23 @@
                                    type="number">
                         </div>
                         <div class="form-group">
-                            <label for="descripcion">Descripcion</label>
-                            <input class="form-control" id="descripcion" placeholder="descripcion"
+                            <label for="username">username</label>
+                            <input class="form-control" id="username" placeholder="username"
+                                   type="text">
+                                </div>
+                        <div class="form-group">
+                            <label for="nombre">nombre</label>
+                            <input class="form-control" id="nombre" placeholder="nombre"
+                                   type="text">
+                                </div>
+                        <div class="form-group">
+                            <label for="correo">correo</label>
+                            <input class="form-control" id="correo" placeholder="correo"
+                                   type="text">
+                                </div>
+                        <div class="form-group">
+                            <label for="telefono">telefono</label>
+                            <input class="form-control" id="telefono" placeholder="telefono"
                                    type="text">
                         </div>
                         <div class="form-group">
@@ -86,12 +111,12 @@
 <!-- This section is really important cause we are asssigning the list of products loaded in the model, into the js -->
 <script th:inline="javascript">
     /*<![CDATA[*/
-    categories = /*[[${categories}]]*/ 'default';
-    categoryDefault = /*[[${categoryDefault}]]*/ 'default';
+    users = /*[[${users}]]*/ 'default';
+    userDefault = /*[[${userDefault}]]*/ 'default';
     /*]]>*/
 </script>
 
-<script src="../js/views/category.js"></script>
+<script src="../js/views/user.js"></script>
 <script src="../js/views/baseCRUD.js"></script>
 </body>
 </html>
