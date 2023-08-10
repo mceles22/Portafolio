@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author user
  */
    @Controller
-@RequestMapping("/usuario")
+
 public class UserController {
  
 
@@ -28,12 +28,12 @@ public class UserController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/listado")
+    @GetMapping("/user")
     public String listado(Model model) {
         var usuarios = usuarioService.getUsuarios();
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("totalUsuarios", usuarios.size());
-        return "/usuario/listado";
+        return "/user";
     }
 
     @GetMapping("/nuevo")
