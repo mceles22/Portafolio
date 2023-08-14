@@ -24,16 +24,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDetailsService")
 public class UsuarioService implements IUsuarioService, UserDetailsService {
-    @Autowired
-    private IUserRepository usuarioDao;
-     @Autowired
-    private IRolRepository rolDao;
-    @Autowired
-    private HttpSession session;
+    
+    private final IUserRepository usuarioDao;
+     
+    private final IRolRepository rolDao;
+    
+    private final HttpSession session;
 
+    public UsuarioService(IUserRepository usuarioDao, IRolRepository rolDao, HttpSession session) {
+        this.usuarioDao = usuarioDao;
+        this.rolDao = rolDao;
+        this.session = session;
+    }
+
+    
  
 
-    @Override
+    
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //Busca el usuario por el username en la tabla
@@ -54,44 +61,44 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {
     }
 
     
-    @Override
+    
     @Transactional(readOnly = true)
     public List<Usuario> getUsuarios() {
         return (List<Usuario>) usuarioDao.findAll();
     }
 
 
-    @Override
+    
     @Transactional(readOnly = true)
     public Usuario getUsuario(Usuario usuario) {
         return usuarioDao.findById(usuario.getIdUsuario()).orElse(null);
     }
 
-    @Override
+    
     @Transactional(readOnly = true)
     public Usuario getUsuarioPorUsername(String username) {
         return usuarioDao.findByUsername(username);
     }
 
-    @Override
+    
     @Transactional(readOnly = true)
     public Usuario getUsuarioPorUsernameYPassword(String username, String password) {
         return usuarioDao.findByUsernameAndPassword(username, password);
     }
 
-    @Override
+    
     @Transactional(readOnly = true)
     public Usuario getUsuarioPorUsernameOCorreo(String username, String correo) {
         return usuarioDao.findByUsernameOrCorreo(username, correo);
     }
 
-    @Override
+    
     @Transactional(readOnly = true)
     public boolean existeUsuarioPorUsernameOCorreo(String username, String correo) {
         return usuarioDao.existsByUsernameOrCorreo(username, correo);
     }
 
-    @Override
+    
     @Transactional
     public void save(Usuario usuario, boolean crearRolUser) {
         usuario=usuarioDao.save(usuario);
@@ -103,7 +110,7 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {
         }
     }
 
-    @Override
+    
     @Transactional
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
